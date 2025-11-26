@@ -1,0 +1,40 @@
+{
+  "name": "proyecto-final-rrhh-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "license": "AGPL-version-3.0",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": "",
+  "keywords": [],
+  "author": "undefined",
+  "contributors": [],
+  "scripts": {
+    "dev": "node --watch app.js",
+    "linter:check": "npx @biomejs/biome lint ./src app.js",
+    "linter:format": "npx @biomejs/biome format --write ./src app.js"
+  },
+  "dependencies": {
+    "@scalar/express-api-reference": "^0.8.25",
+    "@supabase/supabase-js": "^2.84.0",
+    "biome": "^0.3.3",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "mysql2": "^3.15.3",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.7"
+  }
+}

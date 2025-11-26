@@ -1,0 +1,75 @@
+@Host= http://127.0.0.1
+@Port= 3001
+
+### TEST AUTH 1: REGISTRAR UN NUEVO USUARIO
+# @name signupRequest
+POST {{Host}}:{{Port}}/api/user/signup
+Content-Type: application/json
+
+{
+  "email": "test.user@example.com",
+  "password": "password123"
+}
+
+
+### TEST AUTH 2: INICIAR SESIÓN PARA OBTENER TOKEN
+# @name loginRequest
+POST {{Host}}:{{Port}}/api/user/login
+Content-Type: application/json
+
+{
+  "email": "test.user@example.com",
+  "password": "password123"
+}
+
+
+
+### Peticion del tipo GET  TEST 3 (OBTENER EMPLEADO POR ID EXITOSO)
+GET {{Host}}:{{Port}}/api/empleados/1
+
+
+### Peticion del tipo POST  TEST 4 (CREAR EMPLEADO NUEVO)
+POST  {{Host}}:{{Port}}/api/empleados/create
+Content-Type: application/json
+
+{
+  "nombre": "Juan Manuel",
+  "apellido": "Gimenez",
+  "dni": "12345678",
+  "correoElectronico": "juanmanuel.gimenez@example.com",
+  "puesto": "Desarrollador",
+  "capacidades": "JavaScript, Node.js, SQL"
+}
+
+
+### Peticion del tipo DELETE  TEST 5 (BORRAR EMPLEADO POR ID EXITOSO, BORRA EL CREADO ANTERIORMENTE)
+
+DELETE  {{Host}}:{{Port}}/api/empleados/3
+
+
+### Petición del tipo PATCH TEST 6 (ACTUALIZAR EMPLEADO POR ID EXITOSO, ACTUALIZA EL EMPLEADO CON ID 2)
+PATCH  {{Host}}:{{Port}}/api/empleados/2
+Content-Type: application/json
+
+{
+    
+  "nombre": "Lucía",
+  "apellido": "Fernández",
+  "dni": "40123789",
+  "correoElectronico": "lucia.fernandez@correoActualizado.com",
+  "puesto": "Soporte Técnico Señor",
+  "capacidades": "Soporte Técnico, Redes, Hardware, Programacion"
+
+}   
+
+### Petición del tipo GET TEST 7 (OBTENER REPORTE DE CAPACIDADES DE EMPLEADOS)
+GET {{Host}}:{{Port}}/api/empleados/reporte/capacidades 
+
+
+### TEST 8: BÚSQUEDA POR CAPACIDAD
+# Busca todos los empleados que saben "JavaScript"
+GET {{Host}}:{{Port}}/api/empleados/buscar?capacidad=JavaScript
+
+### TEST 9: BÚSQUEDA POR CAPACIDAD
+# Busca todos los empleados que saben "Ventas"
+GET {{Host}}:{{Port}}/api/empleados/buscar?capacidad=ventas
