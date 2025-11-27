@@ -1,22 +1,19 @@
-import config from './src/config/config.js';
-import sequelize from './src/databases/mysql.cnx.js';
 import server from './src/server.js';
+import 'dotenv/config';
+import { connectToDatabase } from './src/databases/mysql.cnx.js';
 
-const runServer = async () => {
+const PORT = process.env.SERVER_PORT || 3001;
+
+const startServer = async () => {
   try {
-    await sequelize.authenticate();
-    console.log(`Conexión a la base de datos MySQL exitosa. ${config.MYSQL_HOST}`);
-    server.listen(config.SERVER_PORT, config.SERVER_HOST, () => {
-      console.log(`Servidor escuchando en http:// ${config.SERVER_HOST}:${config.SERVER_PORT}`);
+    await connectToDatabase();
+    server.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
     });
   } catch (error) {
-    console.error(
-      `No se pudo conectar a la base de datos MySQL: ${config.SERVER_HOST}`,
-      error.message,
-    );
+    console.error('Failed to start server:', error);
+    process.exit(1);
   }
 };
 
-runServer();
-
-export default server;
+startServer();
